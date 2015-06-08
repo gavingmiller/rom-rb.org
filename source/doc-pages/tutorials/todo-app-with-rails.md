@@ -321,7 +321,7 @@ Now we can render this partial from the index view. While we’re here, we can a
   <% tasks.each do |task| %>
     <li>
       <span><%= task[:title] %></span>
-      <span><%= status_label(task[:is_complete]) %></span>
+      <span><%= status_label(task[:is_completed]) %></span>
     </li>
   <% end %>
 </ul>
@@ -551,6 +551,8 @@ Notice that we also need to slot in references to the model and relation here, i
 In order to select and operate on individual objects, we also need to add a couple methods that access tasks by their ID:
 
 ```ruby
+# app/relations/tasks_relation.rb
+
 class TasksRelation < ROM::Relation[:sql]
   def by_id(id)
     where(id: id)
